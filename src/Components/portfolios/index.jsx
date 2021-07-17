@@ -1,9 +1,6 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import "./portfolios.scss";
 import shapeImg_01 from "../../images/shape/shape_10.png";
-import portfolioImg_01 from "../../images/portfolio_1.jpg"
-import portfolioImg_02 from "../../images/portfolio_2.jpg"
-import portfolioImg_03 from "../../images/portfolio_3.jpg"
 import { Tabs, Tab } from "react-bootstrap";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -11,7 +8,19 @@ import "slick-carousel/slick/slick-theme.css";
 
 import PortfolioItem from "../../SingleFeatures/portfolio_item";
 import SectionTitle from "../section_title";
+
+const api = 'https://radiant-beyond-84832.herokuapp.com/api/mcjovial'
+
 export default function Index() {
+    const [projects, setProjects] = useState([]);
+    console.log(projects);
+
+    useEffect(() => {
+        fetch(`${api}/projects`)
+        .then(response => response.json())
+        .then(projects => setProjects(projects))
+    }, [])
+
     const settings = {
         dots: true,
         infinite: true,
@@ -59,34 +68,17 @@ export default function Index() {
                             <Tab eventKey="development" title="" className="project_btn active_btn">
                                 <div className="mt-5">
                                     <Slider {...settings}>
-                                        <div>
-                                            <PortfolioItem
-                                              img={portfolioImg_01}
-                                              title="Design & Develop"
-                                              tag="Design"
-                                            />
-                                        </div>
-                                        <div>
-                                            <PortfolioItem
-                                              img={portfolioImg_02}
-                                              title="Design & Develop"
-                                              tag="Design"
-                                            />
-                                        </div>
-                                        <div>
-                                            <PortfolioItem 
-                                             img={portfolioImg_03}
-                                             title="Design & Develop"
-                                             tag="Design"
-                                            />
-                                        </div>
-                                        <div>
-                                            <PortfolioItem
-                                                img={portfolioImg_02}
-                                                title="Design & Develop"
-                                                tag="Design"
-                                            />
-                                        </div>
+                                        {projects.map((project, i) => (
+                                            <div>
+                                                <PortfolioItem
+                                                    key={i}
+                                                    img={`${api}/projects/${project.slug}/photo`}
+                                                    title={project.title}
+                                                    description={project.description}
+                                                    tag={project.tags.map((tag) => `#${tag} `)}
+                                                />
+                                            </div>
+                                        ))}
                                     </Slider>
                                 </div>
                             </Tab>

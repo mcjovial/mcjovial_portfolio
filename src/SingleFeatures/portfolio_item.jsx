@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function PortfolioItem(props) {
-    const {img, title, url, tag } = props;
+    const {img, title, description, url, tag } = props;
     return (
             <div className="single_project cat1 cat5">
                 <div className="grid_item">
@@ -27,7 +27,8 @@ export default function PortfolioItem(props) {
                         {url ? 
                         <h4><a href={url}>{title}</a></h4>
                         : <h4>{title}</h4> }
-                        <p>{tag}</p>
+                        <p>{description.substring(0, 100)}</p><hr/>
+                        <small><strong>{tag}</strong></small>
                     </div>
                 </div>
             </div>
