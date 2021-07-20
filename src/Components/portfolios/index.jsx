@@ -74,6 +74,7 @@ export default function Index() {
                                                     key={i}
                                                     img={`${api}/projects/${project.slug}/photo`}
                                                     title={project.title}
+                                                    url={project.url}
                                                     description={project.description}
                                                     tag={project.tags.map((tag) => `#${tag} `)}
                                                 />
