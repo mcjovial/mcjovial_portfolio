@@ -9,7 +9,7 @@ import "slick-carousel/slick/slick-theme.css";
 import PortfolioItem from "../../SingleFeatures/portfolio_item";
 import SectionTitle from "../section_title";
 
-const api = 'https://radiant-beyond-84832.herokuapp.com/api/mcjovial'
+const api = 'https://calm-springs-01731.herokuapp.com/api'
 
 export default function Index() {
     const [projects, setProjects] = useState([]);

@@ -1,4 +1,5 @@
 import React from 'react';
+import renderHtml from 'react-render-html';
 
 export default function PortfolioItem(props) {
     const {img, title, description, url, tag } = props;
@@ -7,7 +8,7 @@ export default function PortfolioItem(props) {
                 <div className="grid_item">
                     <div className="deneb_img">
                         { url ? 
-                          <a href={url}>
+                          <a href={url} target="_blank">
                             <img
                                 src={img}
                                 className="img-fluid"
@@ -27,7 +28,7 @@ export default function PortfolioItem(props) {
                         {url ? 
                         <h4><a href={url}>{title}</a></h4>
                         : <h4>{title}</h4> }
-                        <p>{description.substring(0, 100)}</p><hr/>
+                        <p>{renderHtml(description.substring(0, 100))}</p><hr/>
                         <small><strong>{tag}</strong></small>
                     </div>
                 </div>
